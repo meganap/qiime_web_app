@@ -1,3 +1,41 @@
+<%
+results = True
+if results:
+    #
+%>
+<div id="results_buttons clearfix">
+    <a href="">
+        <div class="results_button clearfix">
+            <img src="img/pcoa.png">
+            <div>
+                <h3>Principle Coordinates Plot</h3>
+                <p>Some useful information about pcoa plots</p>
+            </div>
+        </div>
+    </a>
+    <a href="">
+        <div class="results_button clearfix">
+        <img src="img/my_tax_plot.png">
+            <div>
+                <h3>Individual Taxonomic Composition Plot</h3>
+                <p>some useful information about individual taxonomic comp<br>this would show the taxonomic comp of only one sample</p>
+            </div>
+        </div>
+    </a>
+    <a href="">
+        <div class="results_button clearfix">
+        <img src="img/tax_plots.png">
+            <div>
+                <h3>Comparative Taxonomic Composition Plot</h3>
+                <p>some useful information about tax plots and other samples included<br>would have options for all samples from one kit vs one particular sample in the context of some cherry-picked samples</p>
+            </div>
+        </div>
+    </a>
+</div>
+<%
+else:
+    #
+%>
 <h2>Sequencing &amp; Results</h2>
 <p class="portal_blurb">
 Once you have added a <a href="javascript:selectTab('source')">sample source, completed the relevant survey</a> (if applicable), <a href="javascript:selectTab('sample')">taken</a> and <a href="javascript:selectTab('log')">logged</a> your samples</a> and you have <a href="javascript:selectTab('mail')">mailed the samples back to us</a>, we will then perform sequencing and analysis on your samples.

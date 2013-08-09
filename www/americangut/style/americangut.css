@@ -206,6 +206,56 @@ div#source_icons div{
 	height: 100px;
 }
 
+div.results_button {
+	border-radius: 10px;
+	border: 1px solid #ccc;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: auto;
+	margin-right: auto;
+	padding: .5em;
+	width: 850px;
+}
+
+div#results_buttons {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#results_buttons a{
+	text-decoration: none;
+}
+
+div#results_buttons div{
+	color: #000;
+/*	font-size: 18pt;*/
+}
+
+div.results_button:hover {
+	background-color: #eee;
+}
+
+div.results_button img{
+	float: left;
+	margin: 1em;
+	width: 100px;
+}
+
+div.results_button h3{
+	color: #000;
+	width: 500px;
+	float: left;
+/*	font-size: 18pt;*/
+}
+
+div.results_button p{
+	color: #242424;
+	width: 690px;
+	float: left;
+	margin-top: 0;
+}
+
 div.portal_unselected {
 	display: none;
 }
@@ -556,6 +606,32 @@ img#logo {
 img.icon  {
 	margin-right: 1em;
 	border: 0px;
+}
+
+/* D3 styling */
+
+div#taxonomy_plot {
+	font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.legend line {
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
 
 /* Clearfix */
