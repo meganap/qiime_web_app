@@ -1,0 +1,54 @@
+/* D3 styling */
+
+div#taxonomy_plot {
+	font: 10px sans-serif;
+}
+
+text {
+	cursor: pointer;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.legend line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.barHover {
+	opacity: .8;
+}
+
+#chart g.in {
+	fill: #d72335;
+	border: 1px solid lime;
+}
+
+#chart g.out {
+}
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 120px;                  
+  height: 16px;                 
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: #fff;   
+  border: 0px;      
+  border-radius: 5px;           
+  pointer-events: none;         
+}

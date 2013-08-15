@@ -28,6 +28,7 @@ qiime_data_access = data_access_factory(ServerConfig.data_access_type, 'qiime')
         <script src="js/d3.v3.min.js"></script>
         <script src="js/american_gut.js"></script>
         <link rel="stylesheet" type="text/css" href="style/americangut.css">
+        <link rel="stylesheet" type="text/css" href="style/d3_charts.css">
         <link rel="stylesheet" type="text/css" href="style/ui-lightness/jquery-ui-1.10.1.custom.min.css">
         <link rel="icon" type="image/ico" href="img/favicon.ico">
     </head>
