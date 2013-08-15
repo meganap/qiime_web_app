@@ -1,124 +1,20 @@
 <div id="content" class="content">
     <h2>Taxonomic Composition Plot</h2>
-    <div id="breadcrumbs"></div>
+    <br />
+    <div id="breadcrumbs">
+        <ul>
+        <li id="classification1" class="selected_classification"><a href="javascript:changeLevel('1')">Kingdom</a></li>
+        <li id="classification2" class="unselected_classification"><a href="javascript:changeLevel('2')">Phylum</a></li>
+        <li id="classification3" class="unselected_classification"><a href="javascript:changeLevel('3')">Class</a></li>
+        <li id="classification4" class="unselected_classification"><a href="javascript:changeLevel('4')">Order</a></li>
+        <li id="classification5" class="unselected_classification"><a href="javascript:changeLevel('5')">Family</a></li>
+        <li id="classification6" class="unselected_classification"><a href="javascript:changeLevel('6')">Genus</a></li>
+        <li id="classification7" class="unselected_classification"><a href="javascript:changeLevel('7')">Species</a></li>
+        </ul>
+    </div>
     <div id="taxonomy_plot">
     </div>
     <script>
-    var margin = {top: 20, right: 100, bottom: 30, left: 40},
-        width = 700 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
-
-    var x = d3.scale.ordinal()
-        .rangeRoundBands([0, width], .1);
-
-    var y = d3.scale.linear()
-        .rangeRound([height, 0]);
-
-    var color = d3.scale.ordinal()
-        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
-
-    var xAxis = d3.svg.axis()
-        .scale(x)
-        .orient("bottom");
-
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        .orient("left")
-        .tickFormat(d3.format(".0%"));
-    
-    var div = d3.select("#taxonomy_plot").append("div")   
-        .attr("class", "tooltip")               
-        .style("opacity", 0);
-    
-    var svg = d3.select("#taxonomy_plot").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .attr("id", "chart")
-      .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        
-
-      data = [
-          {"SampleID":"M1", "Bacteriodetes":103, "Actinobacteria":500, "Firmicutes":20},
-          {"SampleID":"M2", "Bacteriodetes":13, "Actinobacteria":50, "Firmicutes":253},
-          {"SampleID":"M3", "Bacteriodetes":530, "Actinobacteria":40, "Firmicutes":20},
-          {"SampleID":"M4", "Bacteriodetes":390, "Actinobacteria":489, "Firmicutes":12},
-          {"SampleID":"M5", "Bacteriodetes":209, "Actinobacteria":32, "Firmicutes":89},
-          {"SampleID":"M6", "Bacteriodetes":854, "Actinobacteria":948, "Firmicutes":2},
-          {"SampleID":"M7", "Bacteriodetes":81, "Actinobacteria":204, "Firmicutes":983},
-          {"SampleID":"M8", "Bacteriodetes":348, "Actinobacteria":95, "Firmicutes":382},
-          {"SampleID":"M9", "Bacteriodetes":903, "Actinobacteria":23, "Firmicutes":859},
-          {"SampleID":"M0", "Bacteriodetes":85, "Actinobacteria":95, "Firmicutes":892}
-      ]
-      
-      classification = ["Kingdom","Phylum","Class","Order","Family","Genus","Species"]
-      classification_order = ["Bacteriodetes", "Actinobacteria", "Firmicutes"]
-
-      color.domain(d3.keys(data[0]).filter(function(key) { return key !== "SampleID"; }));
-
-      data.forEach(function(d) {
-        var y0 = 0;
-        d.abundances = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
-        d.abundances.forEach(function(d) { d.y0 /= y0; d.y1 /= y0; });
-      });
-
-      data.sort(function(a, b) { return b.abundances[0].y1 - a.abundances[0].y1; });
-
-      x.domain(data.map(function(d) { return d.SampleID; }));
-
-      svg.append("g")
-          .attr("class", "x axis")
-          .attr("transform", "translate(0," + height + ")")
-          .call(xAxis);
-
-      svg.append("g")
-          .attr("class", "y axis")
-          .call(yAxis);
-
-      var samID = svg.selectAll(".SampleID")
-          .data(data)
-        .enter().append("g")
-          .attr("class", "SampleID")
-          .attr("transform", function(d) { return "translate(" + x(d.SampleID) + ",0)"; });
-
-      samID.selectAll("rect")
-          .data(function(d) { return d.abundances; })
-        .enter().append("rect")
-          .attr("width", x.rangeBand())
-          .attr("y", function(d) { return y(d.y1); })
-          .attr("height", function(d) { return y(d.y0) - y(d.y1); })
-          .style("fill", function(d) { return color(d.name); })
-          .on("mouseover", function(d) {
-              this.style['opacity'] = .6;
-              div.transition()        
-                  .duration(200)      
-                  .style("opacity", .9);      
-              div .html(d.name + ": "+parseInt(Math.abs(d.y0-d.y1)*100,10)+"%")  
-                  .style("left", (d3.event.pageX) + "px")     
-                  .style("top", (d3.event.pageY - 28) + "px");
-          })
-          .on("mouseout", function(d) {
-              this.style['opacity'] = 1;
-             div.transition()        
-                 .duration(500)      
-                 .style("opacity", 0);   
-          });
-
-      /*var legend = svg.select(".SampleID:last-child").selectAll(".legend")
-          .data(function(d) { return d.abundances; })
-        .enter().append("g")
-          .attr("class", "legend")
-          .attr("transform", function(d) { return "translate(" + x.rangeBand() / 2 + "," + y((d.y0 + d.y1) / 2) + ")"; });
-
-      legend.append("line")
-          .attr("x2", 10);
-
-      legend.append("text")
-          .attr("x", 13)
-          .attr("dy", ".35em")
-          .on("click", function(d) {
-              console.log(d.name)
-               })
-          .text(function(d) { return d.name; });*/
+    initTaxonomyBarChart();
     </script>
 </div>
